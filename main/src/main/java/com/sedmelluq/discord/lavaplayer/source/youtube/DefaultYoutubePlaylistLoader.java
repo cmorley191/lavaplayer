@@ -55,7 +55,12 @@ public class DefaultYoutubePlaylistLoader implements YoutubePlaylistLoader {
   private AudioPlaylist buildPlaylist(HttpInterface httpInterface, JsonBrowser json, String selectedVideoId,
                                       Function<AudioTrackInfo, AudioTrack> trackFactory) throws IOException {
 
-    JsonBrowser jsonResponse = json.index(1).get("response");
+    // Temporary workaround
+    JsonBrowser jsonResponse = json.get("response");
+    // In case it doesn't work
+    if(jsonResponse.isNull()) {
+      jsonResponse = json.index(1).get("response");
+    }
 
     String errorAlertMessage = findErrorAlert(jsonResponse);
 
