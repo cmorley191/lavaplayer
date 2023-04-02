@@ -93,7 +93,7 @@ public class DefaultYoutubeTrackDetails implements YoutubeTrackDetails {
     }
 
     TemporalInfo temporalInfo = TemporalInfo.fromRawData(
-        videoDetails.get("isLiveContent").asBoolean(false),
+        videoDetails.get("isLiveContent").asBoolean(false) || videoDetails.get("isLive").asBoolean(false),
         videoDetails.get("lengthSeconds")
     );
 
